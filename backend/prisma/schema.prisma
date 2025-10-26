@@ -32,12 +32,15 @@ model Task {
 }
 
 model Option {
-  id          Int       @id @default(autoincrement())
-  image_url   String
-  option_id   Int
-  task_id     Int
-  task        Task      @relation(fields: [task_id], references: [id])
-  submissions Submission[]
+  id            Int       @id @default(autoincrement())
+  ipfs_cid      String?   // unique CID returned by Pinata (e.g., Qm123...)
+  ipfs_uri      String?   // canonical IPFS URI, like ipfs://Qm123
+  gateway_url   String?   // Pinata gateway URL, like https://gateway.pinata.cloud/ipfs/Qm123
+  image_url     String?   // optional fallback or original link (if provided)
+  option_id     Int
+  task_id       Int
+  task          Task      @relation(fields: [task_id], references: [id])
+  submissions   Submission[]
 }
 
 model Worker {
