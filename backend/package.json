@@ -11,9 +11,15 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@pinata/sdk": "^2.1.0",
     "@types/express": "^5.0.4",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "multer": "^2.0.2",
     "prisma": "^6.18.0",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/multer": "^2.0.0"
   }
 }
