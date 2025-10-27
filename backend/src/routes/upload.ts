@@ -9,3 +9,6 @@ dotenv.config();
 
 // Router setup (to mount this module in index.ts (main server))
 const router = express.Router();
+
+// multer memory storage -> Stores uploaded files in RAM as buffer
+const upload = multer({ storage: multer.memoryStorage() });
