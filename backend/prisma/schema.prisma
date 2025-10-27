@@ -21,35 +21,35 @@ model User {
 }
 
 model Task {
-  id          Int       @id @default(autoincrement())
-  title       String    @default("Select the most clickable thumbnail")
+  id          Int               @id @default(autoincrement())
+  title       String            @default("Select the most clickable thumbnail")
   option      Option[]
   user_id     Int
   signature   String
   amount      String
-  user        User      @relation(fields: [user_id], references: [id])
+  user        User               @relation(fields: [user_id], references: [id])
   submissions Submission[]
 }
 
 model Option {
-  id            Int       @id @default(autoincrement())
-  ipfs_cid      String?   // unique CID returned by Pinata (e.g., Qm123...)
-  ipfs_uri      String?   // canonical IPFS URI, like ipfs://Qm123
-  gateway_url   String?   // Pinata gateway URL, like https://gateway.pinata.cloud/ipfs/Qm123
-  image_url     String?   // optional fallback or original link (if provided)
+  id            Int               @id @default(autoincrement())
+  ipfs_cid      String?           // unique CID returned by Pinata (e.g., Qm123...)
+  ipfs_uri      String?           // canonical IPFS URI, like ipfs://Qm123
+  gateway_url   String?           // Pinata gateway URL, like https://gateway.pinata.cloud/ipfs/Qm123
+  image_url     String?           // optional fallback or original link (if provided)
   option_id     Int
   task_id       Int
-  task          Task      @relation(fields: [task_id], references: [id])
+  task          Task              @relation(fields: [task_id], references: [id])
   submissions   Submission[]
 }
 
 model Worker {
-  id                Int       @id @default(autoincrement())
-  address           String    @unique
+  id                Int             @id @default(autoincrement())
+  address           String          @unique
   submissions       Submission[]
   balance_id        Int
   pending_amount    Int
-  locked_amount    Int
+  locked_amount     Int
 }
 
 model Submission {
