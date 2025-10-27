@@ -20,3 +20,10 @@ if (!PINATA_JWT) {
 
 // Creating Pinata SDK client using JWT token (server-side secret)
 const pinata = new PinataSDK( {pinataJwt: PINATA_JWT} );
+
+// Helper: build a gateway URL for easy browser access (Pinata gateway)
+// We encode filename to preserce safe characters
+
+function buildGatewayUrl(cid: string, filename?: string) {
+  return `https://gateway.pinata.cloud/ipfs/${cid}${filename ? "/" + encodeURIComponent(filename) : ""}`;
+}
