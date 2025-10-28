@@ -27,3 +27,33 @@ const pinata = new PinataSDK( {pinataJwt: PINATA_JWT} );
 function buildGatewayUrl(cid: string, filename?: string) {
   return `https://gateway.pinata.cloud/ipfs/${cid}${filename ? "/" + encodeURIComponent(filename) : ""}`;
 }
+
+/**
+ * Upload endpoint:
+ * - Accepts multipart file named "file"
+ * - Accepts form fields: task_id (Int) and option_id (Int, optional)
+ *
+ * Behavior:
+ * - Validate file (mime, size)
+ * - Upload to Pinata (pinFileToIPFS)
+ * - Create an Option record in DB with ipfs_cid/ipfs_uri/gateway_url (and fallback image_url if provided)
+*/
+
+router.post("/", upload.single("file"), async (req, res) => {
+  try {
+    // Ensuring file exists
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded under field 'file'" });
+    }
+
+    // Basic validation - mime and max size
+    const allowedMimes = (process.env.ALLOWED_MIMES || "image/jpeg,image/png,image/webp").split(",");
+    const maxMB = Number(process.env.MAX_UPLOAD_MB || 5);
+    if (!allowedMimes.includes(req.file.mimetype)) {
+      return res.status(400).json({ error: `Disallowed mime type: ${req.file.mimetype}` });
+    }
+    if (req.file.size > maxMB * 1024 * 1024) {
+      return res.status(400).json({ error: `File too large. Max ${maxMB} MB` });
+    }
+  }
+}
