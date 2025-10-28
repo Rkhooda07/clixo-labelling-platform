@@ -55,5 +55,17 @@ router.post("/", upload.single("file"), async (req, res) => {
     if (req.file.size > maxMB * 1024 * 1024) {
       return res.status(400).json({ error: `File too large. Max ${maxMB} MB` });
     }
+
+    // Get filename, task_id, option_id from request
+    const originalName = req.file.originalname || `upload-${Date.now()}.bin`;
+    const taskIdRaw = req.body.task_id ?? req.body.taskId;   // accept multiple naming styles
+    const optionIdRaw = req.body.option_id ?? req.body.optionId ?? null;
+
+    // parse integers safely
+    const taskId = taskIdRaw ? Number(taskIdRaw) : null;
+    const optionId = optionIdRaw ? Number(optionIdRaw) : null;
+    if (!taskId) {
+      return res.status(400).json({ error: "Missing required form field 'task_id' (id of Task)" });
+    }
   }
 }
