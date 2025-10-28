@@ -1,6 +1,8 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
+    "lib": ["ES2017", "ES2018", "ES2019"],
+
     // File Layout
     "rootDir": "./src",
     "outDir": "./dist",
