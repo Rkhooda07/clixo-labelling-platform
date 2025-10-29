@@ -67,5 +67,11 @@ router.post("/", upload.single("file"), async (req, res) => {
     if (!taskId) {
       return res.status(400).json({ error: "Missing required form field 'task_id' (id of Task)" });
     }
+
+    //Converting the uploaded buffer to a File (Pinata SDK expects a file not Readable stream anymore)
+    const fileToUpload = new File([req.file.buffer], originalName, {
+      type: req.file.mimetype,
+      lastModified: Date.now(),
+    });
   }
 }
