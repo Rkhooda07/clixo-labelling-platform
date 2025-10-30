@@ -37,7 +37,7 @@ model Option {
   ipfs_uri      String?           // canonical IPFS URI, like ipfs://Qm123
   gateway_url   String?           // Pinata gateway URL, like https://gateway.pinata.cloud/ipfs/Qm123
   image_url     String?           // optional fallback or original link (if provided)
-  option_id     Int
+  option_id     Int?
   task_id       Int
   task          Task              @relation(fields: [task_id], references: [id])
   submissions   Submission[]
