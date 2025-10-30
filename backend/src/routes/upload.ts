@@ -78,5 +78,10 @@ router.post("/", upload.single("file"), async (req, res) => {
     const result = await pinata.upload.public.file(fileToUpload, {
       metadata: { name: originalName },
     });
+    
+    // Build gateway URLs
+    const cid = result.cid;
+    const ipfsUri = `ipfs://${cid}`;
+    const gatewayUrl = buildGatewayUrl(cid, originalName);
   }
 }
