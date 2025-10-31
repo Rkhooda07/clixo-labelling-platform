@@ -11,6 +11,7 @@
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
+    "moduleResolution": "nodenext",
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
@@ -42,5 +43,9 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  }
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["src"]
 }
