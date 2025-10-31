@@ -82,5 +82,30 @@ router.post("/", upload.single("file"), async (req, res) => {
     const cid = result.cid;
     const ipfsUri = `ipfs://${cid}`;
     const gatewayUrl = buildGatewayUrl(cid, originalName);
+
+    // Save data in DB using Pinata
+    let optionRecord;
+    if (optionId) {
+      optionRecord = await prisma.option.update({
+        where: { id: optionId},
+        data: {
+          ipfs_cid: cid,
+          ipfs_uri: ipfsUri,
+          gateway_url: gatewayUrl,
+          image_url: req.body.image_url || null,
+        },
+      });
+    } else {
+      optionRecord = await prisma.option.create({
+        data: {
+          ipfs_cid: cid,
+          ipfs_uri: ipfsUri,
+          gateway_url: gatewayUrl,
+          image_url: req.body.image_url || null,
+          option_id: optionId,
+          task: { connect: { id: taskId } },
+        },
+      });
+    }
   }
 }
