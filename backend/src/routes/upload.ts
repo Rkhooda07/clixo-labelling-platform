@@ -107,5 +107,20 @@ router.post("/", upload.single("file"), async (req, res) => {
         },
       });
     }
+
+    // Respond with success or failure
+    return res.status(200).json({
+      ok: true,
+      cid,
+      ipfs_uri: ipfsUri,
+      gatewayUrl: gatewayUrl,
+      file_name: originalName,
+      option: optionRecord,
+    });
+  } catch(err) {
+    console.error("Upload Error: ", err);
+    return res.status(500).json({ error: (err as Error).message || "Upload failed" });
   }
-}
+});
+
+export default router;
