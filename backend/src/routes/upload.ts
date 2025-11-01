@@ -73,5 +73,10 @@ router.post("/", upload.single("file"), async (req, res) => {
       type: req.file.mimetype,
       lastModified: Date.now(),
     });
+
+    // Upload the file to IPFS via Pinata
+    const result = await pinata.upload.public.file(fileToUpload, {
+      metadata: { name: originalName },
+    });
   }
 }
