@@ -9,3 +9,6 @@ const PORT = process.env.PORT || 4000;
 
 // Middleware to parse JSON (optional, but useful for other routes)
 app.use(express.json());
+
+// Route for file uploads
+app.use("/upload", uploadRouter);
