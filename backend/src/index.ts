@@ -17,3 +17,8 @@ app.use("/upload", uploadRouter);
 app.get("/", (req, res) => {
   res.send("✅ Clixo backend is running!");
 });
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
