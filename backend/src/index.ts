@@ -12,3 +12,8 @@ app.use(express.json());
 
 // Route for file uploads
 app.use("/upload", uploadRouter);
+
+// Basic root route
+app.get("/", (req, res) => {
+  res.send("✅ Clixo backend is running!");
+});
