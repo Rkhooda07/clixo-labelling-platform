@@ -21,10 +21,11 @@ if (!PINATA_JWT) {
 const pinata = new PinataSDK( {pinataJwt: PINATA_JWT} );
 
 // Helper: build a gateway URL for easy browser access (Pinata gateway)
-// We encode filename to preserce safe characters
+// Pinata (and IPFS in general) stores that file directly at the CID root.
+// So, filename is not required in URL
 
 function buildGatewayUrl(cid: string, filename?: string) {
-  return `https://gateway.pinata.cloud/ipfs/${cid}${filename ? "/" + encodeURIComponent(filename) : ""}`;
+  return `https://gateway.pinata.cloud/ipfs/${cid}`;
 }
 
 /**
