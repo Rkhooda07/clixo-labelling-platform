@@ -28,7 +28,8 @@ export function validateCreateTaskBody(body: any) {
   // Title checks
   if (!("title" in body) || typeof body.title !== "string" || body.title.trim().length === 0) {
     errors.push("Title is required and must be a non-empty string");
-    return { valid: false, errors};
+  } else if (body.title.trim().length > 200) {
+    errors.push("Title must be 200 characters or fewer.");
   }
 
   // Signature checks (optional coz user will pay after creating task draft)
