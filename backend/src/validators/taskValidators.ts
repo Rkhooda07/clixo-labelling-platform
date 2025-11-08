@@ -1,5 +1,3 @@
-import { empty } from "@prisma/client/runtime/library";
-
 export type IncomingOption = {
   ipfs_cid: string;
   ipfs_uri?: string | null;
