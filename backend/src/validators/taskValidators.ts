@@ -30,4 +30,9 @@ export function validateCreateTaskBody(body: any) {
     errors.push("Title is required and must be a non-empty string");
     return { valid: false, errors};
   }
+
+  // Signature checks (optional coz user will pay after creating task draft)
+  if ("signature" in body && body.signature != null && typeof body.signature === "string") {
+    errors.push("signature, must be a string");
+  }
 }
