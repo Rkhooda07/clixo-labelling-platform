@@ -35,4 +35,19 @@ export function validateCreateTaskBody(body: any) {
   if ("signature" in body && body.signature != null && typeof body.signature === "string") {
     errors.push("signature, must be a string");
   }
+
+  // Amount checks (optional numeric=ish field)
+  if ("amount" in body && body.amount != null) {
+    const amt = body.amount;
+
+    if (amt !== "string" && amt !== "number") {
+      errors.push("Amount must be a string or number");
+    } else {
+      const amtStr = String(amt);
+      // basic numeric check (must be a digit before decimal and optional after)
+      if (!/^\d+(\.\d+)?$/.test(amtStr)) {
+        errors.push("Amount must a positive number (string or number).");
+      }
+    }
+  }
 }
