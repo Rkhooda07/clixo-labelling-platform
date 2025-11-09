@@ -19,5 +19,14 @@ export async function createTask(req: Request, res: Response) {
         errors,
       });
     }
+
+    // Extract user_id from authenticated user (Authorization)
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized: user not found in request.",
+      });
+    }
   }
 }
