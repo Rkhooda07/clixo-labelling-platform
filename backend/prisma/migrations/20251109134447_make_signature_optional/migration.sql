@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Task" ALTER COLUMN "signature" DROP NOT NULL,
+ALTER COLUMN "amount" DROP NOT NULL;
