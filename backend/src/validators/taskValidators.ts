@@ -54,10 +54,10 @@ export function validateCreateTaskBody(body: any) {
   if (!("options" in body) || !Array.isArray(body.options)) {
     errors.push("options is req. and must be an array");
   }
-  else if (body.option.length === 0) {
+  else if (body.options.length === 0) {
     errors.push("options must contain atleast one element");
   }
-  else if (body.option.length > 7) {
+  else if (body.options.length > 7) {
     errors.push("options cannot contain more than 7 items.");
   } else {
     body.options.forEach((opt: any, idx: Number) => {
