@@ -8,5 +8,16 @@ import { validateCreateTaskBody } from "../validators/taskValidators.js";
  */
 
 export async function createTask(req: Request, res: Response) {
-  
+  try {
+    // Validate the incoming request body
+    const { valid, errors } = validateCreateTaskBody(req.body);
+
+    if (!valid) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid task data",
+        errors,
+      });
+    }
+  }
 }
