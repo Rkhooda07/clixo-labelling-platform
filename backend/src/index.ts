@@ -12,10 +12,10 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 
 // Route for file uploads
-app.use("/upload", uploadRouter);
+app.use("/api/upload", uploadRouter);
 
 // Route for task creation
-app.use("/task", taskRouter);
+app.use("/api/tasks", taskRouter);
 
 // Basic root route
 app.get("/", (req, res) => {
