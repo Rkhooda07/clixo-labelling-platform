@@ -31,7 +31,7 @@ export function validateCreateTaskBody(body: any) {
   }
 
   // Signature checks (optional coz user will pay after creating task draft)
-  if ("signature" in body && body.signature != null && typeof body.signature === "string") {
+  if ("signature" in body && body.signature != null && typeof body.signature !== "string") {
     errors.push("signature, must be a string");
   }
 
