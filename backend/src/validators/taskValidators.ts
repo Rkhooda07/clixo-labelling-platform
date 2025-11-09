@@ -39,7 +39,7 @@ export function validateCreateTaskBody(body: any) {
   if ("amount" in body && body.amount != null) {
     const amt = body.amount;
 
-    if (amt !== "string" && amt !== "number") {
+    if (typeof amt !== "string" && typeof amt !== "number") {
       errors.push("Amount must be a string or number");
     } else {
       const amtStr = String(amt);
