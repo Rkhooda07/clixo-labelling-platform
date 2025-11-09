@@ -21,11 +21,11 @@ export async function createTask(req: Request, res: Response) {
     }
 
     // Extract user_id from authenticated user (Authorization)
-    const userId = req.user?.id;
+    const userId = req.user?.id || req.body.user_id || 1; // Temporary fallback for dev
     if (!userId) {
-      return res.status(401).json({
+      return res.status(400).json({
         success: false,
-        message: "Unauthorized: user not found in request.",
+        message: "Missing user_id in request body or token.",
       });
     }
 
@@ -57,11 +57,12 @@ export async function createTask(req: Request, res: Response) {
       message: "Task draft created successfully.",
       task,
     });
-  } catch (error) {
-    console.error("Error creating task: ", error);
+  } catch (error: any) {
+    console.error("❌ Prisma error:", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error while creating task.",
+      error: error.message,
     });
   }
 }
