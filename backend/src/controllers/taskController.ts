@@ -28,5 +28,8 @@ export async function createTask(req: Request, res: Response) {
         message: "Unauthorized: user not found in request.",
       });
     }
+
+    // Destructure data
+    const { title, signature, amount, options } = req.body;
   }
 }
