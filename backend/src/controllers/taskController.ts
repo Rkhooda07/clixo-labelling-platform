@@ -31,5 +31,37 @@ export async function createTask(req: Request, res: Response) {
 
     // Destructure data
     const { title, signature, amount, options } = req.body;
+
+    // Create task and related options in a single txn
+    const task = await prisma.task.create({
+      data: {
+        title,
+        signature: signature || null,
+        amount: amount || null,
+        user_id: userId,
+        option: {
+          create: options.map((opt: any) => ({
+            ipfs_cid: opt.ipfs_cid,
+            ipfs_uri: opt.ipfs_uri || null,
+            gateway_url: opt.gateway_url,
+            image_url: opt.image_url || null,
+            option_id: opt.optionId || null,
+          })),
+        },
+      },
+      include: { option: true },
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Task draft created successfully.",
+      task,
+    });
+  } catch (error) {
+    console.error("Error creating task: ", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error while creating task.",
+    });
   }
 }
