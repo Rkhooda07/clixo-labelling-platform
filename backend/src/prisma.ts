@@ -1,4 +1,4 @@
-import { PrismaClient } from "./generated/prisma/client.js";
+import { PrismaClient } from "./generated/prisma/client.ts";
 
 // This PrismaClient class is Db - client used to query postgres
 

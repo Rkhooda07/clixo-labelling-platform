@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import { PinataSDK } from "pinata";
-import prisma from "../prisma.js";
+import prisma from "../prisma.ts";
 import dotenv from "dotenv";
 
 dotenv.config();

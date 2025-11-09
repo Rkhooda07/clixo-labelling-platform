@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import prisma from "../prisma.js";
-import { validateCreateTaskBody } from "../validators/taskValidators.js";
+import prisma from "../prisma.ts";
+import { validateCreateTaskBody } from "../validators/taskValidators.ts";
 
 /**
  * Controller: createTask
