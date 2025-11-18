@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import uploadRouter from "./routes/upload.ts";  // Coz we're using "type: module"
+import uploadRouter from "./routes/uploadRoutes.ts";  // Coz we're using "type: module"
 import taskRouter from "./routes/taskRoutes.ts";
 
 dotenv.config();
