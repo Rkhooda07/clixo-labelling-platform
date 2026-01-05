@@ -23,12 +23,15 @@ model User {
 model Task {
   id          Int               @id @default(autoincrement())
   title       String            @default("Select the most clickable thumbnail")
-  option      Option[]
+  options      Option[]
   user_id     Int
   signature   String?
   amount      String?
   user        User              @relation(fields: [user_id], references: [id])
   submissions Submission[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  status      String            @default("CREATED")
 }
 
 model Option {
@@ -61,6 +64,7 @@ model Submission {
   task_id     Int
   task        Task      @relation(fields: [task_id], references: [id])
   amount      String
+  createdAt   DateTime  @default(now())
 }
 
 
