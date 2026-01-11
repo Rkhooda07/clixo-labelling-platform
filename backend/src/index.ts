@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import uploadRouter from "./routes/uploadRoutes.ts";  // Coz we're using "type: module"
 import taskRouter from "./routes/taskRoutes.ts";
 import submissionRoutes from "./routes/submissionRoutes.ts";
+import aggregationRoutes from "./routes/aggregationRoutes.ts";
 
 dotenv.config();
 
@@ -20,6 +21,9 @@ app.use("/api/tasks", taskRouter);
 
 // Route for submissions
 app.use("/api/submissions", submissionRoutes);
+
+// Route for aggregations
+app.use("/api", aggregationRoutes);
 
 // Basic root route
 app.get("/", (req, res) => {
